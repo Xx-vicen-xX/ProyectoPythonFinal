@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EcoDesafíos</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo">EcoDesafíos</div>
+    <div id="frase-motivacional" class="frase">Inspirate cada día</div>
+  </header>
+  <main class="dashboard">
+    <section class="desafio-container" aria-label="Desafío del día">
+      <h2>Desafío ecológico de hoy</h2>
+      <div class="desafio-card" id="card">
+        <p class="desafio-text">{{ desafio_texto }}</p>
+        <div class="video-container">
+          <iframe width="100%" height="200" src="{{ video_url }}" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+      <form method="post" class="acciones">
+        <button type="submit" name="realizado" class="btn btn-success"> ¡Lo hice!</button>
+        <button type="submit" name="otro" class="btn btn-alt" onclick="animarCarta()"> Otro desafío</button>
+      </form>
+      {% if mensaje %}
+        <p class="feedback">{{ mensaje }}</p>
+      {% endif %}
+      {% if mensaje_final %}
+        <p class="feedback especial">{{ mensaje_final }}</p>
+      {% endif %}
+    </section>
+    <section class="progreso-container" aria-label="Progreso ecológico">
+      <label for="progreso">Tu progreso ecológico</label>
+      <progress id="progreso" value="{{ progreso }}" max="100"></progress>
+      <div class="nivel">
+        {% if progreso < 30 %}
+          Nivel 1 - EcoAprendiz
+        {% elif progreso < 70 %}
+          Nivel 2 - EcoHéroe
+        {% else %}
+          Nivel 3 - Guardián Verde
+        {% endif %}
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <p> Proyecto educativo por un mundo más sostenible</p>
+  </footer>
+  <script src="/static/js/script.js"></script>
+</body>
+</html>
